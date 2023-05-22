@@ -5,21 +5,21 @@ import 'package:http_response_handling/models/categories_model_data.dart';
 import 'api_provider.dart';
 
 void main(List<String> args) {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: MyApp(),
   ));
 }
 
 //    https://api.chucknorris.io/
 class MyApp extends StatefulWidget {
-  MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  ApiProvider _provider = ApiProvider();
+  final ApiProvider _provider = ApiProvider();
   List<String> _list = [];
   CategoriesDetail _detail = CategoriesDetail();
 
@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   getDetails(String category) async {
-    var response = await _provider.get("jokes/random?category=" + category);
+    var response = await _provider.get("jokes/random?category=$category");
     setState(() {
       _detail = categoriesDetailFromJson(response.body);
     });
@@ -52,17 +52,17 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home Page"),
+        title: const Text("Home Page"),
       ),
       body: FutureBuilder(
-        future: Future.delayed(Duration(seconds: 2)), //getcategories(),
+        future: Future.delayed(const Duration(seconds: 2)), //getcategories(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done ||
               snapshot.hasData) {
             return ListView.builder(
               itemCount: _list.length,
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
                   onTap: () async {
@@ -76,12 +76,12 @@ class _MyAppState extends State<MyApp> {
                     }
                   },
                   child: Container(
-                      padding: EdgeInsets.all(5),
-                      margin: EdgeInsets.symmetric(vertical: 2.5),
+                      padding: const EdgeInsets.all(5),
+                      margin: const EdgeInsets.symmetric(vertical: 2.5),
                       color: Colors.red,
                       child: Text(
                         _list[index],
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 20,
                             fontWeight: FontWeight.bold),
@@ -90,7 +90,7 @@ class _MyAppState extends State<MyApp> {
               },
             );
           } else {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
         },
       ),

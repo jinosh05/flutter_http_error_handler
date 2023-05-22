@@ -5,17 +5,17 @@ import 'package:http_response_handling/models/categories_model_data.dart';
 class ComedyPage extends StatefulWidget {
   final String? name;
 
-  ComedyPage({required this.name});
+  const ComedyPage({super.key, required this.name});
   @override
   ComedyPageState createState() => ComedyPageState();
 }
 
 class ComedyPageState extends State<ComedyPage> {
-  ApiProvider _provider = ApiProvider();
+  final ApiProvider _provider = ApiProvider();
   CategoriesDetail _detail = CategoriesDetail();
 
   getDetails(String category) async {
-    var response = await _provider.get("jokes/random?category=" + category);
+    var response = await _provider.get("jokes/random?category=$category");
     setState(() {
       _detail = categoriesDetailFromJson(response.body);
     });
@@ -36,8 +36,8 @@ class ComedyPageState extends State<ComedyPage> {
       ),
       body: SafeArea(
         child: FutureBuilder(
-          future:
-              Future.delayed(Duration(seconds: 3)), //getDetails(widget.name!),
+          future: Future.delayed(
+              const Duration(seconds: 3)), //getDetails(widget.name!),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState == ConnectionState.done ||
                 snapshot.hasData) {
@@ -51,10 +51,10 @@ class ComedyPageState extends State<ComedyPage> {
                   //  Image.network(_detail.url!),
                   // Text(_detail.url!),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 25),
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: Text(
                       _detail.value!,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.black,
                           fontSize: 22,
                           fontWeight: FontWeight.bold),
@@ -63,7 +63,7 @@ class ComedyPageState extends State<ComedyPage> {
                 ],
               );
             } else {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }

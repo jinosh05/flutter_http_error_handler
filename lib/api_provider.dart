@@ -6,7 +6,7 @@ class ApiProvider {
   final String _baseUrl = "https://api.chucknorris.io/";
 
   Future get(String url) async {
-    final response;
+    final http.Response response;
     try {
       response = await http.get(
         Uri.parse(_baseUrl + url),

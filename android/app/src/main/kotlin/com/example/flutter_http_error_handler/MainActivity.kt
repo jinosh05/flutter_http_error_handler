@@ -1,4 +1,4 @@
-package com.example.http_response_handling
+package com.example.flutter_http_error_handler
 
 import io.flutter.embedding.android.FlutterActivity
 
