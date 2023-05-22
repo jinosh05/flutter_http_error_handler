@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http_response_handling/comedy_screen.dart';
 import 'package:http_response_handling/models/categories_model.dart';
