@@ -15,20 +15,20 @@ class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  _MyAppState createState() => _MyAppState();
+  MyAppState createState() => MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class MyAppState extends State<MyApp> {
   final ApiProvider _provider = ApiProvider();
   List<String> _list = [];
   CategoriesDetail _detail = CategoriesDetail();
 
   getcategories() async {
     var response = await _provider.get("jokes/categories");
-    print("Added");
+    debugPrint("Added");
     setState(() {
       _list = categoriesFromJson(response.body);
-      print("Done");
+      debugPrint("Done");
     });
 
     return "success";
@@ -67,9 +67,10 @@ class _MyAppState extends State<MyApp> {
                 return InkWell(
                   onTap: () async {
                     await getDetails(_list[index]);
-                    print("Okay");
+                    debugPrint("Okay");
                     if (_detail.categories![0] != null) {
-                      print(_detail.categories![0]);
+                      debugPrint(_detail.categories![0]);
+                      // ignore: use_build_context_synchronously
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) =>
                               ComedyPage(name: _detail.categories![0]!)));

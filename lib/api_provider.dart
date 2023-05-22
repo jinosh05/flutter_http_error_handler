@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_response_handling/custom_exception.dart';
 
@@ -11,7 +12,7 @@ class ApiProvider {
       response = await http.get(
         Uri.parse(_baseUrl + url),
       );
-      print(response.body);
+      debugPrint(response.body);
       ErrorHandler()._response(response);
     } on SocketException {
       throw FetchDataException("No internet");
@@ -24,7 +25,7 @@ class ErrorHandler {
   dynamic _response(http.Response response) {
     switch (response.statusCode) {
       case 200:
-        print("Connection Success");
+        debugPrint("Connection Success");
         return true;
       case 400:
         throw BadRequestException(response.body);
